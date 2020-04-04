@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href=" /cart.css">
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+    <main>
+        <% if(cart && cart.length > 0) {%>
+        <ol class="cart__item-list">
+            <% cart.map((c,index)=>{%>
+            <li class="cart__item">
+                <h2><%= c.productId.title %> <span>(Quantity:<%= c.quantity%>)</span></h2>
+                <form action="/cart/delete-product" method="POST">
+                    <button class="btn danger" type="submit">Delete</button>
+                    <input type="hidden" value="<%= c.productId._id%>" name="productId">
+                </form>
+            </li>
+            <% });%>
+        </ol>
+        <div class="centered">
+            <form action="/order/order-product" method="POST">
+                <button class="btn primary" type="submit">Order</button>
+            </form>
+        </div>
+        <% }else {%>
+        <h1>Cart is empty!</h1>
+        <%}%>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../includes/head.ejs') %>
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+    <main class="centered">
+        <h1><%= product.title %></h1>
+        <hr>
+        <div>
+            <div class="image">
+                <img src="<%= product.imageurl %>" alt="<%= product.title %>">
+            </div>
+        </div>
+        <h2>$<%= product.price %></h2>
+        <p><%= product.description %></p>
+        <%if(isAuthenticated){ %>
+        <form action="/cart" method="post">
+            <button class="btn" type="submit">Add to Cart</button>
+        </form>
+        <% } %>
+    </main>
+</body>
+
+</html>

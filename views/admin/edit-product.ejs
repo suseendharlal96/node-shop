@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/product.css">
+    <link rel="stylesheet" href="/css/form.css">
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+    <main>
+        <% if(error && error.length > 0){ %>
+        <div class="user-message user-message--error"><%= error %></div>
+        <% } %>
+        <form class="product-form" action="/admin/<% if (editMode) {%>edit-product<% }else {%>show<%}%>" method="POST">
+            <div class="form-control">
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" value="<% if (editMode || hasError) {%><%= product.title%><%}%>">
+            </div>
+            <div class="form-control">
+                <label for="imageurl">ImageUrl</label>
+                <input type="file" name="imageurl" id="imageurl" >
+            </div>
+            <div class="form-control">
+                <label for="price">Price</label>
+                <input type="number" name="price" id="price"  value="<% if (editMode || hasError) {%><%= product.price%><%}%>">
+            </div>
+            <div class="form-control">
+                <label for="description">Description</label>
+                <textarea type="text" name="description" id="description" rows="5"><% if (editMode || hasError) {%><%= product.description%><%}%></textarea>
+            </div>
+<%if(editMode){%>
+    
+    <input type  = " hidden" name="id" value="<%= product._id%>">
+            <%}%>
+            <button class="btn" type="submit"><% if(editMode) {%> Update Product <% } else {%> Add Product <%}%></button>
+        </form>
+    </main>
+</body>
+
+</html>

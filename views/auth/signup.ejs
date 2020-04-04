@@ -1,0 +1,32 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/form.css">
+<link rel="stylesheet" href="/css/auth.css">
+</head>
+
+<body>
+
+    <%- include('../includes/navigation.ejs') %>
+    <main>
+        <% if(error && error.length > 0){ %>
+        <div class="user-message user-message--error"><%= error %></div>
+        <% } %>
+        <form id="login-form" action="/signup" method="POST" novalidate>
+            <div class="form-control">
+                <label for="email">E-Mail</label>
+                <input type="email" class="<%= validation.find(e=>e.param==='email') ? 'invalid' : '' %>" name="email"
+                    id="email" value="<%=oldData.email%>">
+            </div>
+            <div class="form-control">
+                <label for="password">Password</label>
+                <input type="password" class="<%= validation.find(e=>e.param==='password') ? 'invalid' : '' %>"
+                    name="password" id="password" value="<%=oldData.password%>">
+            </div>
+            <div class="form-control">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" class="<%= validation.find(e=>e.param==='confirmPassword') ? 'invalid' : '' %>"
+                    name="confirmPassword" id="confirmPassword" value="<%=oldData.confirmPassword%>">
+            </div>
+            <button class="btn" type="submit">Signup</button>
+        </form>
+    </main>
+</body>
